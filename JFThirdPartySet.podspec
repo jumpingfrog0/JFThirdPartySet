@@ -28,21 +28,29 @@ A set of thrid party code wrote in Objective-C.
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = 'Source/Classes/**/*'
-
   # attach non-arc files
-  non_arc_files = ['Source/Classes/GTM/GTMStringEncoding.{h,m}']
+  non_arc_files = ['Source/Classes/GTM/non-arc/*.{h,m}']
   s.exclude_files= non_arc_files
-  s.subspec 'no-arc' do |sna|
-  	sna.requires_arc = false
-	sna.source_files = non_arc_files
+  s.subspec 'no-arc' do |ss|
+#    ss.dependency "JFThirdPartySet", "~> 0.1.0"
+	ss.xcconfig = { "HEADER_SEARCH_PATHS" => "$(PODS_ROOT)/JFThirdPartySet" }
+  	ss.requires_arc = false
+	ss.source_files = non_arc_files
+	ss.dependency 'JFThirdPartySet/GTM'
+  end
+
+  s.subspec 'GTM' do |ss|
+  	ss.source_files = 'Source/Classes/GTM/*.{h,m}'
+  end
+
+  s.subspec 'Reachability' do |ss|
+  	ss.source_files = 'Source/Classes/Reachability/*'
   end
   
   # s.resource_bundles = {
   #   'JFThirdPartySet' => ['${Source}/Assets/*.png']
   # }
 
-  # s.public_header_files = 'Source/Classes/**/*.h'
   s.frameworks = 'Foundation', 'UIKit'
   # s.dependency 'AFNetworking', '~> 2.3'
 end
