@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'JFThirdPartySet'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of JFThirdPartySet.'
+  s.summary          = 'A set of thrid party code repos wrote in Objective-C.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,7 +18,7 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+A set of thrid party code repos wrote in Objective-C.
                        DESC
 
   s.homepage         = 'https://github.com/jumpingfrog0/JFThirdPartySet'
@@ -28,13 +28,21 @@ TODO: Add long description of the pod here.
 
   s.ios.deployment_target = '9.0'
 
-  s.source_files = '${Source}/Classes/**/*'
+  s.source_files = 'Source/Classes/**/*'
+
+  # attach non-arc files
+  non_arc_files = ['Source/Classes/GTM/GTMStringEncoding.{h,m}']
+  s.exclude_files= non_arc_files
+  s.subspec 'no-arc' do |sna|
+  	sna.requires_arc = false
+	sna.source_files = non_arc_files
+  end
   
   # s.resource_bundles = {
   #   'JFThirdPartySet' => ['${Source}/Assets/*.png']
   # }
 
   # s.public_header_files = 'Source/Classes/**/*.h'
-  # s.frameworks = 'Foundation', 'UIKit'
+  s.frameworks = 'Foundation', 'UIKit'
   # s.dependency 'AFNetworking', '~> 2.3'
 end

@@ -1,4 +1,3 @@
-use_frameworks!
 
 target 'JFThirdPartySet_Example' do
   pod 'JFThirdPartySet', :path => '../'
