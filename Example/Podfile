@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'JFThirdPartySet_Example' do
+  pod 'JFThirdPartySet', :path => '../'
+
+  target 'JFThirdPartySet_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
